@@ -1,0 +1,40 @@
+server:
+    port: 8282
+    front: http://localhost:8282
+
+everteam:
+    gateway: 
+        url: localhost:8080
+        client:
+            clientId: internal
+            clientSecret: internal
+            accessTokenUri: http://localhost:8080/uaa/oauth/token
+            userAuthorizationUri: http://localhost:8080/uaa/oauth/authorize
+            tokenName: oauth_token
+            authenticationScheme: query
+    async:
+        core-pool-size: 6
+        max-pool-size: 50
+        queue-capacity: 10000
+
+
+logging.level.com.everteam: DEBUG
+
+storage:
+    extractor: embedded
+    
+    repositories:
+        - name: l1
+          type: FS
+          rootDirectory: D:\home\eclipse_workspace\es_head\mb
+          patterns: doc,docx,xls,xlsx,ppt,pptx,msg,pdf,jpg,gif
+          changeService:
+              type: ANALYTICS            #LOGS or ANALYTICS
+              maxrows: 1000
+              scheduler: 30          #in seconds
+              params:
+                  collection: lpelpe
+                  extractor: true
+          params :
+              watcher: true
+              synchroDelay: 86400   #in seconds

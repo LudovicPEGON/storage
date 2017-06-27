@@ -1,0 +1,38 @@
+server:
+    port: 8080
+
+security:
+    ignored:
+        - /**
+
+ribbon:
+  eureka:
+    enabled: false 
+
+analytics:
+  ribbon:
+    listOfServers: localhost:8090/analytics/1.0
+
+
+//logging.level.com.everteam: DEBUG
+
+fs-agent:
+  fixedRate: 3600000
+  
+  thread:
+    core-pool: 10
+    max-pool: 10
+    timeout: 100
+  queue:
+    capacity: 200000
+
+  collection: "lpelpe"
+
+storage:
+    repositories:
+        - name: l1
+          type: FS
+          rootDirectory: D:\home\eclipse_workspace\es_head\
+
+
+        
