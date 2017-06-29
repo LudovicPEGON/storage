@@ -125,7 +125,7 @@ public class RepositoryService {
                 Integer count =  schedulerCount.get(repository.getName()); 
                 if (count != null) {
                     if (count == repository.getChangeService().getScheduler()) {
-                        count = 0;
+                        schedulerCount.put(repository.getName(), 0); 
                         try {
                             checkUpdates(drive, repository);
                         }
