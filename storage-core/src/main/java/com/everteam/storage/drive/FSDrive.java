@@ -46,8 +46,6 @@ import com.everteam.storage.domain.ESRepository;
 import com.everteam.storage.domain.ESUser;
 import com.everteam.storage.service.FSTree;
 import com.everteam.storage.service.FSTree.ESFileFlat;
-import com.everteam.storage.service.FSTree.ESFileMetada;
-import com.everteam.storage.service.FSTree.ESFileTree;
 import com.everteam.storage.service.change.Changes;
 import com.everteam.storage.utils.FileInfo;
 
@@ -66,9 +64,20 @@ public class FSDrive extends DriveImpl {
     public void init(ESRepository repository)
             throws IOException, GeneralSecurityException {
         super.init(repository);
-        Path rootDirectory = Paths.get(getRepository().getRootDirectory());
+        Path rootDirectory = Paths.get(getRootDirectory());
         Files.createDirectories(rootDirectory);
         fstree.init(this);        
+    }
+
+
+
+    private String getRootDirectory() {
+        String rootdirectory = getRepository().getRootDirectory();
+        String sp =  System.getProperty(rootdirectory);
+        if (sp != null) {
+            rootdirectory = sp;
+        }
+        return rootdirectory;
     }
     
     
@@ -244,7 +253,7 @@ public class FSDrive extends DriveImpl {
             esfile.setPermissions(null);
         }
 
-        Path repositoryPath = Paths.get(repository.getRootDirectory());
+        Path repositoryPath = Paths.get(getRootDirectory());
         Path parentPath = path.getParent();
         Path relativePath = buildRelativePath(parentPath);
 
@@ -280,8 +289,8 @@ public class FSDrive extends DriveImpl {
 
     private Path buildPath(Path relativePath) {
         Path p;
-        ESRepository repository = getRepository();
-        p = Paths.get(repository.getRootDirectory());
+        
+        p = Paths.get(getRootDirectory());
         if (relativePath != null) {
             p = p.resolve(relativePath);
         }
@@ -293,7 +302,7 @@ public class FSDrive extends DriveImpl {
     }
 
     public Path buildRelativePath(Path filePath) throws IOException {
-        return Paths.get(this.getRepository().getRootDirectory())
+        return Paths.get(getRootDirectory())
                 .relativize(filePath);
     }
 

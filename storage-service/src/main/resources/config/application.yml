@@ -147,15 +147,12 @@ storage:
           rootDirectory: 0B-pBfcA-dNNOdzgtVUhNSFJQU0k
         - name: l1
           type: FS
-          rootDirectory: D:\home\eclipse_workspace\es_head
+          rootDirectory: user.home
           patterns: doc,docx,xls,xlsx,ppt,pptx,msg,pdf,jpg,gif
           changeService:
-            type: ANALYTICS            #LOGS or ANALYTICS
+            type: LOGS            #LOGS or ANALYTICS
             maxrows: 1000
-            scheduler: 3          #in seconds
-            params:
-              collection: lpelpe
-              extractor: true
+            scheduler: 30          #in seconds
           params :
             watcher: true
             synchroDelay: 86400   #in seconds

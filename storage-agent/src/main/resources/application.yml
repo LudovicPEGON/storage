@@ -26,14 +26,14 @@ storage:
     repositories:
         - name: l1
           type: FS
-          rootDirectory: D:\home\eclipse_workspace\es_head\mb
+          rootDirectory: user.home
           patterns: doc,docx,xls,xlsx,ppt,pptx,msg,pdf,jpg,gif
           changeService:
               type: ANALYTICS            #LOGS or ANALYTICS
               maxrows: 1000
-              scheduler: 30          #in seconds
+              scheduler: 3          #in seconds
               params:
-                  collection: lpelpe
+                  collection: fs-docs
                   extractor: true
           params :
               watcher: true
